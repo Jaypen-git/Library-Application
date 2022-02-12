@@ -84,12 +84,12 @@ const displayForm = () => {
 const changeStatus = (e) => {
     let target = e.target;
     let libraryItem = myLibrary[target.id];
-    if (libraryItem.status === 'read'){
-        libraryItem.status = 'unread';
-        target.innerText = 'unread';
+    if (libraryItem.status === 'Read'){
+        libraryItem.status = 'Unread';
+        target.innerText = 'Unread';
     } else {
-        libraryItem.status = 'read';
-        target.innerText = 'read';
+        libraryItem.status = 'Read';
+        target.innerText = 'Read';
     }
 }
 
@@ -124,4 +124,4 @@ submitButton.addEventListener('click', function(){
     addBook(a, title, author, pages, status);
 })
 
-addBook(a, 'Example', 'John Doe', 400, 'read');
+addBook(a, 'Example', 'John Doe', 400, 'Read');
