@@ -121,7 +121,11 @@ submitButton.addEventListener('click', function(){
     let author = document.querySelector('#author').value;
     let pages = parseInt(document.querySelector('#pages').value); //parseInt converts a string number into an integer
     let status = document.querySelector('#status').value;
-    addBook(a, title, author, pages, status);
+    if (isNaN(pages)){ //checks if user inputted anything but a number
+        console.log('uh-oh');
+    } else {
+        addBook(a, title, author, pages, status);
+    }
 })
 
 addBook(a, 'Example', 'John Doe', 400, 'Read');
