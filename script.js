@@ -1,14 +1,14 @@
-const myLibrary = [];
+const myLibrary = JSON.parse(localStorage.getItem('myLibrary')) || []; // parse will convert the returned string into an array 
 
 function book(bookID, title, author, pages, status){
-    this.bookID = bookID;
+    this.bookID = bookID; // this lets me accurately target a book in an array
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.status = status;
 }
 
-let a = -1;
+let a = 0; // id value
 
 const tbody = document.querySelector('tbody');
 const displayButton = document.querySelector('#displayButton');
@@ -25,7 +25,7 @@ const create_td = () => {
 const create_deleteButton = () => {
     let deleteButtoncontainer = document.createElement('td');
     let deleteButton = document.createElement('button');
-    deleteButton.setAttribute('id', a);
+    deleteButton.setAttribute('id', a); // the id corresponds to the books id
     deleteButton.innerText = 'Delete';
     deleteButtoncontainer.appendChild(deleteButton);
     return deleteButtoncontainer;
@@ -40,14 +40,13 @@ const create_statusButton = (status) => {
 }
 
 const addBook = (bookID, bookTitle, bookAuthor, bookPages, bookStatus) => {
-    a++;
     bookID = a;
     let keys = [bookID, bookTitle, bookAuthor, bookPages, bookStatus];
     tr = create_tr();
     tr.setAttribute('id', a);
-    for (let i = 1; i < keys.length; i++){
+    for (let i = 1; i < keys.length; i++){ // start on key 1 to not print the books id
         let val = keys[i];
-        if (i === 4){
+        if (i === 4){ // on the 4th item, the status, run this code
             statusButton = create_statusButton(bookStatus);
             statusButton.addEventListener('click', changeStatus);
             tr.appendChild(statusButton);
@@ -63,12 +62,14 @@ const addBook = (bookID, bookTitle, bookAuthor, bookPages, bookStatus) => {
     tbody.appendChild(tr);
     let newBook = new book(bookID, bookTitle, bookAuthor, bookPages, bookStatus);
     myLibrary.push(newBook);
-};
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary)); // convert the array into a string
+    a++;
+}
 
 const deleteBook = (e) => {
     let target = e.target; // e = event object and target is whichever node had the event
     myLibrary.splice(target.id, 1);
-    let buttonContainer = target.parentNode.parentNode;
+    let buttonContainer = target.parentNode.parentNode; // this will target the tr element. the buttons parent is the td element
     buttonContainer.remove();
 }
 
@@ -84,6 +85,7 @@ const displayForm = () => {
 const changeStatus = (e) => {
     let target = e.target;
     let libraryItem = myLibrary[target.id];
+    console.log(libraryItem);
     if (libraryItem.status === 'Read'){
         libraryItem.status = 'Unread';
         target.innerText = 'Unread';
@@ -127,5 +129,3 @@ submitButton.addEventListener('click', function(){
         addBook(a, title, author, pages, status);
     }
 })
-
-addBook(a, 'Example', 'John Doe', 400, 'Read');
