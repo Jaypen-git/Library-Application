@@ -8,7 +8,7 @@ function book(bookID, title, author, pages, status){
     this.status = status;
 }
 
-let a = 0; // id value
+let a = -1; // id value
 
 const tbody = document.querySelector('tbody');
 const displayButton = document.querySelector('#displayButton');
@@ -68,9 +68,15 @@ const addBook = (bookID, bookTitle, bookAuthor, bookPages, bookStatus) => {
 
 const deleteBook = (e) => {
     let target = e.target; // e = event object and target is whichever node had the event
-    myLibrary.splice(target.id, 1);
+    let item = myLibrary.find(({bookID}) => bookID === parseInt(target.id)); // find method returns first element whose object key bookID matches the buttons id
+    let index = myLibrary.indexOf(item);
+    if (index !== -1){
+        myLibrary.splice(index, 1);
+    }
     let buttonContainer = target.parentNode.parentNode; // this will target the tr element. the buttons parent is the td element
     buttonContainer.remove();
+    console.log(myLibrary);
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary)); // push changes to local storage
 }
 
 const displayForm = () => {
@@ -83,16 +89,17 @@ const displayForm = () => {
 }
 
 const changeStatus = (e) => {
-    let target = e.target;
-    let libraryItem = myLibrary[target.id];
-    console.log(libraryItem);
-    if (libraryItem.status === 'Read'){
-        libraryItem.status = 'Unread';
-        target.innerText = 'Unread';
-    } else {
+    let element = e.target;
+    let target = parseInt(element.id);
+    let libraryItem = myLibrary[target];
+    if (libraryItem.status === 'Unread'){
         libraryItem.status = 'Read';
-        target.innerText = 'Read';
+        element.innerText = 'Read';
+    } else {
+        libraryItem.status = 'Unread';
+        element.innerText = 'Unread';
     }
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary)); 
 }
 
 myLibrary.forEach(function(book){
