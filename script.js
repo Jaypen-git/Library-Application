@@ -8,7 +8,7 @@ function book(bookID, title, author, pages, status){
     this.status = status;
 }
 
-let a = -1; // id value
+let a = 0; // id value
 
 const tbody = document.querySelector('tbody');
 const displayButton = document.querySelector('#displayButton');
@@ -103,7 +103,6 @@ const changeStatus = (e) => {
 }
 
 myLibrary.forEach(function(book){
-    a++;
     let keys = Array.from(Object.keys(book));
     tr = create_tr();
     for (let i = 1; i < keys.length; i++){
@@ -123,6 +122,7 @@ myLibrary.forEach(function(book){
     tr.setAttribute('id', a);
     tr.appendChild(deleteButton);
     tbody.appendChild(tr);
+    a++;
 })
 
 submitButton.addEventListener('click', function(){
