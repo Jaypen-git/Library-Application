@@ -44,3 +44,53 @@ table {
 }
 
 /* My CSS */
+header {
+	background-color: rgb(236, 78, 78);
+	padding: 10px 0 10px 0;
+	text-align: center;
+	top: 0;
+	width: 100vw;
+}
+header h1 {
+	color: rgb(245, 245, 245);
+	font-size: 40px;
+}
+.container {
+	display: flex;
+	font-size: 18px;
+	height: calc(100vh - 60px);
+	width: 100vw;
+}
+.bookForm {
+	background-color: rgb(245, 245, 245);
+	flex: 2;
+}
+.bookForm * {
+	display: block;
+	margin: 0 0 10px 20px;
+}
+.bookForm:first-child {
+	padding-top: 20px;
+}
+.bookForm input, .bookForm select{
+	font-size: 16px;
+	padding: 5px;
+}
+.sentence {
+	display: inline;
+}
+.bookList {
+	flex: 5;
+}
+table {
+	margin: 20px auto;
+	text-align: center;
+	width: 90%;
+}
+td, th {
+	padding: 10px;
+}
+button {
+	font-size: 16px;
+	width: 90px;
+}
