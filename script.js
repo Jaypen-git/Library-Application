@@ -12,31 +12,21 @@ const controller = {
     author: document.querySelector('#author'),
     pages: document.querySelector('#pages'),
     status: document.querySelector('#status'),
-    createButton: function(name, num){
+    createButton: (name, num) => {
         let td = document.createElement('td');
         let button = document.createElement('button');
         button.setAttribute('id', num);
         button.innerText = name;
         td.appendChild(button);
         return td;
-    }
-}
-// book object constructor
-class book {
-    constructor(bookID, title, author, pages, status){
-        this.bookID = bookID;
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.status = status;
-    }
+    },
     addBook(bookID, bookTitle, bookAuthor, bookPages, bookStatus){
         let newBook = new book(bookID, bookTitle, bookAuthor, bookPages, bookStatus);
         myLibrary.push(newBook);
         localStorage.setItem('myLibrary', JSON.stringify(myLibrary)); // convert the array into a string
         a++;       
-    }
-    deleteBook(e){
+    },
+    deleteBook: (e) => {
         let target = e.target; // e = event object and target is whichever node had the event
         let item = myLibrary.find(({bookID}) => bookID === parseInt(target.id)); // find method returns first element whose object key bookID matches the buttons id
         let index = myLibrary.indexOf(item);
@@ -45,10 +35,9 @@ class book {
         }
         let buttonContainer = target.parentNode.parentNode; // this will target the tr element. the buttons parent is the td element
         buttonContainer.remove();
-        console.log(myLibrary);
         localStorage.setItem('myLibrary', JSON.stringify(myLibrary)); // push changes to local storage
-    }
-    changeStatus(e){
+    },
+    changeStatus: (e) => {
         let element = e.target;
         let target = parseInt(element.id);
         let libraryItem = myLibrary[target];
@@ -60,8 +49,8 @@ class book {
             element.innerText = 'Unread';
         }
         localStorage.setItem('myLibrary', JSON.stringify(myLibrary)); 
-    }
-    displayBook(bookID, bookTitle, bookAuthor, bookPages, bookStatus){
+    },
+    displayBook: (bookID, bookTitle, bookAuthor, bookPages, bookStatus) => {
         bookID = a;
         let keys = [bookID, bookTitle, bookAuthor, bookPages, bookStatus];
         let tr = document.createElement('tr');
@@ -70,7 +59,7 @@ class book {
             let val = keys[i];
             if (i === 4){ // on the 4th item, the status, run this code
                 let statusButton = controller.createButton(val, a);
-                statusButton.firstChild.addEventListener('click', book.changeStatus);
+                statusButton.firstChild.addEventListener('click', this.changeStatus);
                 tr.appendChild(statusButton);
             } else {
                 let td = document.createElement('td');
@@ -79,23 +68,31 @@ class book {
             }
         }
         let deleteButton = controller.createButton('Delete', a);
-        deleteButton.addEventListener('click', book.deleteBook);
+        deleteButton.addEventListener('click', this.deleteBook);
         tr.appendChild(deleteButton);
         controller.tbody.appendChild(tr);
-        this.addBook(bookID, bookTitle, bookAuthor, bookPages, bookStatus)
+        controller.addBook(bookID, bookTitle, bookAuthor, bookPages, bookStatus);
+    }
+}
+// book object constructor
+class book {
+    constructor(bookID, title, author, pages, status){
+        this.bookID = bookID;
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.status = status;
     }
 }
 
 myLibrary.forEach(function(book){
-    console.log(book);
     let keys = Array.from(Object.keys(book));
     tr = document.createElement('tr');
     for (let i = 1; i < keys.length; i++){
         let val = book[keys[i]];
         if (i === 4){
             let statusButton = controller.createButton(val, a);
-            console.log(statusButton.firstChild);
-            statusButton.firstChild.addEventListener('click', book.changeStatus);
+            statusButton.firstChild.addEventListener('click', controller.changeStatus);
             tr.appendChild(statusButton);
         } else {
             let td = document.createElement('td');
@@ -104,7 +101,7 @@ myLibrary.forEach(function(book){
         }
     }
     let deleteButton = controller.createButton('Delete', a);
-    deleteButton.firstChild.addEventListener('click', book.deleteBook);
+    deleteButton.firstChild.addEventListener('click', controller.deleteBook);
     tr.setAttribute('id', a);
     tr.appendChild(deleteButton);
     controller.tbody.appendChild(tr);
@@ -120,8 +117,8 @@ controller.submitButton.addEventListener('click', function(){
     if (isNaN(pages)){ //checks if user inputted anything but a number
         console.log('uh-oh');
     } else {
-        newBook.addBook(a, title, author, pages, status);
-        newBook.displayBook(a, title, author, pages, status);
+        controller.addBook(a, title, author, pages, status);
+        controller.displayBook(a, title, author, pages, status);
         a++;
     }
 })
