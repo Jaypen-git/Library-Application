@@ -1,4 +1,4 @@
-const library = {
+export default library = {
     myLibrary: JSON.parse(localStorage.getItem('myLibrary')) || [], // parse will convert the returned string into an array
     addBook: (bookID, bookTitle, bookAuthor, bookPages, bookStatus) => {
         let newBook = new book(bookID, bookTitle, bookAuthor, bookPages, bookStatus);
