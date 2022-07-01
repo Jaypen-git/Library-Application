@@ -2,7 +2,7 @@
   "name": "library-application",
   "version": "1.0.0",
   "description": "A browser-based library application that makes use of object constructors",
-  "main": "script.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
