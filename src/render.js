@@ -1,36 +1,34 @@
-export default domLibrary = {
+export default page = {
     a: 0, // for setting IDs
-    page: {
-        tbody: document.querySelector('tbody'),
-        submitButton: document.querySelector('#submit'),
-        title: document.querySelector('#title'),
-        author: document.querySelector('#author'),
-        pages: document.querySelector('#pages'), //parseInt converts a string number into an integer
-        status: document.querySelector('#status'),
-        create_tr: () => {
-            let tr = document.createElement('tr');
-            return tr;
-        },
-        create_td: () => {
-            let td = document.createElement('td');
-            return td;
-        },
-        create_deleteButton: () => {
-            let deleteButtoncontainer = page.create_td();
-            let deleteButton = document.createElement('button');
-            deleteButton.setAttribute('id', a); // the id corresponds to the books id
-            deleteButton.innerText = 'Delete';
-            deleteButtoncontainer.appendChild(deleteButton);
-            return deleteButtoncontainer;
-        },
-        create_statusButton: (status) => {
-            let statusButtoncontainer = page.create_td();
-            statusButton = document.createElement('button');
-            statusButton.setAttribute('id', a);
-            statusButton.innerText = status;
-            statusButtoncontainer.appendChild(statusButton);
-            return statusButtoncontainer;
-        }
+    tbody: document.querySelector('tbody'),
+    submitButton: document.querySelector('#submit'),
+    title: document.querySelector('#title'),
+    author: document.querySelector('#author'),
+    pages: document.querySelector('#pages'), //parseInt converts a string number into an integer
+    status: document.querySelector('#status'),
+    create_tr: () => {
+        let tr = document.createElement('tr');
+        return tr;
+    },
+    create_td: () => {
+        let td = document.createElement('td');
+        return td;
+    },
+    create_deleteButton: () => {
+        let deleteButtoncontainer = page.create_td();
+        let deleteButton = document.createElement('button');
+        deleteButton.setAttribute('id', a); // the id corresponds to the books id
+        deleteButton.innerText = 'Delete';
+        deleteButtoncontainer.appendChild(deleteButton);
+        return deleteButtoncontainer;
+    },
+    create_statusButton: (status) => {
+        let statusButtoncontainer = page.create_td();
+        statusButton = document.createElement('button');
+        statusButton.setAttribute('id', a);
+        statusButton.innerText = status;
+        statusButtoncontainer.appendChild(statusButton);
+        return statusButtoncontainer;
     },
     renderBook: (bookID, bookTitle, bookAuthor, bookPages, bookStatus) => {
         bookID = a;
