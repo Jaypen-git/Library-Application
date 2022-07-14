@@ -1,4 +1,6 @@
-import domBinding from "./dom-binding";
+import BindEvents from "./dom-binding";
+
+BindEvents();
 
 // (function(){
 //     class book {
