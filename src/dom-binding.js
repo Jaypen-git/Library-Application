@@ -19,16 +19,20 @@ const BindEvents = () => {
             }
         }
         let deleteButton = Page.create_deleteButton();
-        deleteButton.addEventListener('click', Library.deleteBook);
         tr.setAttribute('id', book.bookID);
         tr.appendChild(deleteButton);
         Page.tbody.appendChild(tr);
         Page.a++;
     })
-    let deleteButtonList = document.querySelectorAll('.deleteBtn');
-    deleteButtonList.forEach(btn => {
-        btn.addEventListener('click', Library.deleteBook(btn.id));
-    })
+
+    const bindDeleteBtns = (() => {
+        let deleteButtonList = document.querySelectorAll('.deleteBtn');
+        deleteButtonList.forEach(btn => {
+            btn.addEventListener('click', Library.deleteBook);
+            btn.addEventListener('click', Page.removeBook);
+        })
+    })();
+
     Page.submitButton.addEventListener('click', () => {
         if (Validate === true) {
             console.log('an error has occurred');

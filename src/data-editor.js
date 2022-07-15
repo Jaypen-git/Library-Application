@@ -7,7 +7,8 @@ const Library = {
         Library.myLibrary.push(newBook);
         localStorage.setItem('myLibrary', JSON.stringify(Library.myLibrary)); // convert the array into a string
     },
-    deleteBook: (target) => {
+    deleteBook: (e) => {
+        let target = e.target;
         let item = Library.myLibrary.find(({bookID}) => bookID === parseInt(target.id)); // find method returns first element whose object key bookID matches the buttons id
         let index = Library.myLibrary.indexOf(item);
         if (index !== -1){
@@ -15,7 +16,9 @@ const Library = {
         }
         localStorage.setItem('myLibrary', JSON.stringify(Library.myLibrary)); // push changes to local storage
     },
-    changeStatus: (target) => {
+    changeStatus: (e) => {
+        let element = e.target;
+        let target = parseInt(element.id);
         let libraryItem = Library.myLibrary[target];
             if (libraryItem.status === 'Unread'){
                 libraryItem.status = 'Read';
