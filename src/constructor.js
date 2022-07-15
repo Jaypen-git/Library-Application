@@ -1,4 +1,4 @@
-export default class book {
+class book {
     constructor(bookID, title, author, pages, status){
         this.bookID = bookID; // this lets me accurately target a book in an array
         this.title = title;
@@ -7,3 +7,5 @@ export default class book {
         this.status = status;
     }
 }
+
+export default book;
