@@ -1,5 +1,6 @@
 import Library from './data-editor';
 import Page from './render';
+import Validate from './validate';
 
 const BindEvents = () => {
     Library.myLibrary.forEach(function(book){
@@ -24,15 +25,19 @@ const BindEvents = () => {
         Page.tbody.appendChild(tr);
         Page.a++;
     })
-
-    Page.submitButton.addEventListener('click', function(){
-        // parseInt converts a string number into an integer
-        if (isNaN(Page.pages.value)){ //checks if user inputted anything but a number
-            console.log('uh-oh');
-        } else {
-            Library.addBook(a, Page.title.value, Page.author.value, parseInt(Page.pages.value), Page.status.value);
-        }
+    let deleteButtonList = document.querySelectorAll('.deleteBtn');
+    deleteButtonList.forEach(btn => {
+        btn.addEventListener('click', Library.deleteBook(btn.id));
     })
+    Page.submitButton.addEventListener('click', () => {
+        if (Validate === true) {
+            console.log('an error has occurred');
+        } else {
+            Page.renderBook(Page.a, Page.title.value, Page.author.value, parseInt(Page.pages.value), Page.status.value)
+            Library.addBook(Page.a, Page.title.value, Page.author.value, parseInt(Page.pages.value), Page.status.value);
+        }
+
+    });
 };
 
 export default BindEvents;
