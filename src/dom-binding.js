@@ -34,7 +34,7 @@ const BindEvents = () => {
     })();
 
     Page.submitButton.addEventListener('click', () => {
-        if (Validate === true) {
+        if (Validate() === true) {
             console.log('an error has occurred');
         } else {
             Page.renderBook(Page.a, Page.title.value, Page.author.value, parseInt(Page.pages.value), Page.status.value)

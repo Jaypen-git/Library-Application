@@ -1,7 +1,8 @@
 import Page from './render';
 
-let formTitle = Page.title;
-let formAuthor = Page.author;
+let titleInp = Page.title;
+let authorInp = Page.author;
+let pagesInp = Page.pages;
 
 const Validate = () => {
     // parseInt converts a string number into an integer
