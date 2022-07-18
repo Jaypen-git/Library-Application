@@ -53,6 +53,7 @@ const Page = {
         // deleteButton.addEventListener('click', Library.deleteBook); // if you add parenthesis on function, it will automatically call
         tr.appendChild(deleteButton);
         Page.tbody.appendChild(tr);
+        Page.a++;
     },
     removeBook: (e) => {
         let target = e.target;
