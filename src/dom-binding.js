@@ -34,13 +34,15 @@ const BindEvents = () => {
     })();
 
     Page.submitButton.addEventListener('click', () => {
-        if (Validate(Page.pages.value, Library.myLibrary) === true) {
+        if (Validate.pages(Page.pages.value) === true) {
             console.log('an error has occurred');
-        } else {
-            Page.renderBook(Page.a, Page.title.value, Page.author.value, parseInt(Page.pages.value), Page.status.value)
+        } else if (Validate.title(Library.myLibrary, Page.title.value) === true) {
+            console.log('an error has occurred');
+        }
+        else {
+            Page.renderBook(Page.a, Page.title.value, Page.author.value, parseInt(Page.pages.value), Page.status.value);
             Library.addBook(Page.a, Page.title.value, Page.author.value, parseInt(Page.pages.value), Page.status.value);
         }
-
     });
 };
 

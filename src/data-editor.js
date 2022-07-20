@@ -19,13 +19,6 @@ const Library = {
                 alert('An error has occurred');
             }
         });
-        
-        // let item = Library.myLibrary.find(({bookID}) => bookID === parseInt(target.id)); // find method returns first element whose object key bookID matches the buttons id
-        // let index = Library.myLibrary.indexOf(item);
-        // if (index !== -1){
-        //     Library.myLibrary.splice(index, 1);
-        // }
-        // localStorage.setItem('myLibrary', JSON.stringify(Library.myLibrary)); // push changes to local storage
     },
     changeStatus: (e) => {
         let element = e.target;
