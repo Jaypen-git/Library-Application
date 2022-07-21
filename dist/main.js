@@ -47,6 +47,14 @@ const BindEvents = () => {
         })
     })();
 
+    const bindStatusBtns = (() => {
+        let statButtonList = document.querySelectorAll('.statusBtn');
+        statButtonList.forEach(btn => {
+            btn.addEventListener('click', _data_editor__WEBPACK_IMPORTED_MODULE_0__["default"].changeStatus);
+            btn.addEventListener('click', _render__WEBPACK_IMPORTED_MODULE_1__["default"].changeStatus);
+        })
+    })();
+
     _render__WEBPACK_IMPORTED_MODULE_1__["default"].submitButton.addEventListener('click', () => {
         if (_validate__WEBPACK_IMPORTED_MODULE_2__["default"].pages(_render__WEBPACK_IMPORTED_MODULE_1__["default"].pages.value) === true) {
             console.log('an error has occurred');
@@ -197,6 +205,14 @@ const Page = {
         let target = e.target;
         let row = target.parentNode.parentNode; // the table row is two steps up
         row.remove();
+    },
+    changeStatus: (e) => {
+        let target = e.target;
+        if (target.innerText === 'Read') {
+            target.innerText = 'Unread';
+        } else {
+            target.innerText = 'Read';
+        }
     }
 }
 

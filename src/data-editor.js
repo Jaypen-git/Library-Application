@@ -15,8 +15,6 @@ const Library = {
                 let index = Library.myLibrary.indexOf(item);
                 Library.myLibrary.splice(index, 1);
                 localStorage.setItem('myLibrary', JSON.stringify(Library.myLibrary));
-            } else {
-                alert('An error has occurred');
             }
         });
     },

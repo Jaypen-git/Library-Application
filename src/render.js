@@ -59,6 +59,14 @@ const Page = {
         let target = e.target;
         let row = target.parentNode.parentNode; // the table row is two steps up
         row.remove();
+    },
+    changeStatus: (e) => {
+        let target = e.target;
+        if (target.innerText === 'Read') {
+            target.innerText = 'Unread';
+        } else {
+            target.innerText = 'Read';
+        }
     }
 }
 

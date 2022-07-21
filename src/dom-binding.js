@@ -10,7 +10,6 @@ const BindEvents = () => {
             let val = book[keys[i]];
             if (i === 4){
                 let statusButton = Page.create_statusButton(val);
-                statusButton.addEventListener('click', Library.changeStatus);
                 tr.appendChild(statusButton);
             } else {
                 let td = Page.create_td();
@@ -33,6 +32,14 @@ const BindEvents = () => {
         })
     })();
 
+    const bindStatusBtns = (() => {
+        let statButtonList = document.querySelectorAll('.statusBtn');
+        statButtonList.forEach(btn => {
+            btn.addEventListener('click', Library.changeStatus);
+            btn.addEventListener('click', Page.changeStatus);
+        })
+    })();
+
     Page.submitButton.addEventListener('click', () => {
         if (Validate.pages(Page.pages.value) === true) {
             console.log('an error has occurred');
@@ -44,6 +51,6 @@ const BindEvents = () => {
             Library.addBook(Page.a, Page.title.value, Page.author.value, parseInt(Page.pages.value), Page.status.value);
         }
     });
-};
+}
 
 export default BindEvents;
