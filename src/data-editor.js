@@ -20,14 +20,17 @@ const Library = {
     },
     changeStatus: (e) => {
         let element = e.target;
-        let target = parseInt(element.id);
-        let libraryItem = Library.myLibrary[target];
-            if (libraryItem.status === 'Unread'){
-                libraryItem.status = 'Read';
-            } else {
-                libraryItem.status = 'Unread';
+        let target = element.parentNode.parentNode.firstChild.innerText;
+        Library.myLibrary.forEach(item => {
+            if (item.title === target) {
+                if (item.status === 'Read') {
+                    item.status = 'Unread';
+                } else {
+                    item.status = 'Read';
+                }
             }
-            localStorage.setItem('myLibrary', JSON.stringify(Library.myLibrary)); 
+        });
+        localStorage.setItem('myLibrary', JSON.stringify(Library.myLibrary));
     }
 }
 

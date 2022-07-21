@@ -24,7 +24,6 @@ const BindEvents = () => {
             let val = book[keys[i]];
             if (i === 4){
                 let statusButton = _render__WEBPACK_IMPORTED_MODULE_1__["default"].create_statusButton(val);
-                statusButton.addEventListener('click', _data_editor__WEBPACK_IMPORTED_MODULE_0__["default"].changeStatus);
                 tr.appendChild(statusButton);
             } else {
                 let td = _render__WEBPACK_IMPORTED_MODULE_1__["default"].create_td();
@@ -66,7 +65,7 @@ const BindEvents = () => {
             _data_editor__WEBPACK_IMPORTED_MODULE_0__["default"].addBook(_render__WEBPACK_IMPORTED_MODULE_1__["default"].a, _render__WEBPACK_IMPORTED_MODULE_1__["default"].title.value, _render__WEBPACK_IMPORTED_MODULE_1__["default"].author.value, parseInt(_render__WEBPACK_IMPORTED_MODULE_1__["default"].pages.value), _render__WEBPACK_IMPORTED_MODULE_1__["default"].status.value);
         }
     });
-};
+}
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BindEvents);
 
@@ -96,21 +95,22 @@ const Library = {
                 let index = Library.myLibrary.indexOf(item);
                 Library.myLibrary.splice(index, 1);
                 localStorage.setItem('myLibrary', JSON.stringify(Library.myLibrary));
-            } else {
-                alert('An error has occurred');
             }
         });
     },
     changeStatus: (e) => {
         let element = e.target;
-        let target = parseInt(element.id);
-        let libraryItem = Library.myLibrary[target];
-            if (libraryItem.status === 'Unread'){
-                libraryItem.status = 'Read';
-            } else {
-                libraryItem.status = 'Unread';
+        let target = element.parentNode.parentNode.firstChild.innerText;
+        Library.myLibrary.forEach(item => {
+            if (item.title === target) {
+                if (item.status === 'Read') {
+                    item.status = 'Unread';
+                } else {
+                    item.status = 'Read';
+                }
             }
-            localStorage.setItem('myLibrary', JSON.stringify(Library.myLibrary)); 
+        });
+        localStorage.setItem('myLibrary', JSON.stringify(Library.myLibrary));
     }
 }
 
